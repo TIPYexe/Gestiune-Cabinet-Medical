@@ -257,13 +257,31 @@ public class Main {
                     produse.add(new_produs);
                     break;
                 }
-                case 9:
+                case 9: {
+                    System.out.print("Numele-ul produsului de modificat: ");
+                    String nume = sc.next();
+                    int elem = findProdusByName_int(produse, nume);
+
+                    float new_pret;
+                    System.out.print("Noul pret de vanzare: ");
+                    new_pret = sc.nextFloat();
+
+                    produse.get(elem).setPret_vanzare(new_pret);
 
                     break;
-                case 10:
+                }
+                case 10:{
+                    System.out.print("Numele-ul produsului de modificat: ");
+                    String nume = sc.next();
+                    int elem = findProdusByName_int(produse, nume);
 
+                    float new_pret;
+                    System.out.print("Noul pret de cumparare: ");
+                    new_pret = sc.nextFloat();
+
+                    produse.get(elem).setPret(new_pret);
+                }
                     break;
-
             }
 
         }
