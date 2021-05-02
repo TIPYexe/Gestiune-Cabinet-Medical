@@ -10,7 +10,7 @@ class Medici extends Om {
         this.id_salon = id_salon;
     }
 
-    public int getId_medic() {
+    public int getId() {
         return id_medic;
     }
 

@@ -24,7 +24,7 @@ public class Programare implements Comparable<Programare> {
         return id_serviciu;
     }
 
-    public int getId_programare() {
+    public int getId() {
         return id_programare;
     }
 

@@ -48,8 +48,8 @@ public class Main {
                         for (Programare elem : programari) {
                             System.out.println(elem.getServiciu());
                             System.out.println(elem.getData_ora_programare());
-                            System.out.println(findMedicById(medici, elem.getId_medic()));
-                            System.out.println(findClientById(clienti, elem.getId_client()));
+                            System.out.println(findMedicNameById(medici, elem.getId_medic()));
+                            System.out.println(findClientNameById(clienti, elem.getId_client()));
                             System.out.println();
                         }
 
@@ -58,34 +58,35 @@ public class Main {
                 }
                 case 2: {
 
-                    Programare new_programare = new Programare();
+                    if(medici.size() == 0){
+                        System.out.println("Nu avem niciun angajat!");
+                    }
+                    else {
+                        Programare new_programare = new Programare();
 
-                    System.out.print("id-medic: ");
-                    int id = sc.nextInt();
-                    new_programare.setId_medic(id);
+                        System.out.print("id-medic: ");
+                        int id = sc.nextInt();
+                        new_programare.setId_medic(id);
 
-                    System.out.print("id-client: ");
-                    id = sc.nextInt();
-                    new_programare.setId_client(id);
+                        System.out.print("id-client: ");
+                        id = sc.nextInt();
+                        new_programare.setId_client(id);
 
-                    System.out.print("id-serviciu: ");
-                    id = sc.nextInt();
-                    new_programare.setId_serviciu(id);
+                        System.out.print("id-serviciu: ");
+                        id = sc.nextInt();
+                        new_programare.setId_serviciu(id);
 
-                    int zi, luna, an;
-                    System.out.print("Zi: ");
-                    zi = sc.nextInt();
-                    System.out.print("Luna: ");
-                    luna = sc.nextInt();
-                    System.out.print("Anul: ");
-                    an = sc.nextInt();
+                        int zi, luna, an;
+                        System.out.println("Data (zz-ll-aaaa): ");
+                        String dataFormat = sc.nextLine();
 
-                    Date data_programare = new SimpleDateFormat("dd/MM/yyyy").parse(Integer.toString(zi) + '/' + Integer.toString(luna) + '/' + Integer.toString(an));
-                    new_programare.setData_ora_programare(data_programare);
+                        Date data_programare = new SimpleDateFormat("dd/MM/yyyy").parse(dataFormat.replace('-','/'));
+                        new_programare.setData_ora_programare(data_programare);
 
-                    programari.add(new_programare);
+                        programari.add(new_programare);
 
-                    break;
+                        break;
+                    }
                 }
                 case 3: {
 
@@ -93,15 +94,11 @@ public class Main {
                     int id = sc.nextInt();
                     int toChange = findProgramareById(programari, id);
 
-                    int zi, luna, an;
-                    System.out.print("Zi: ");
-                    zi = sc.nextInt();
-                    System.out.print("Luna: ");
-                    luna = sc.nextInt();
-                    System.out.print("Anul: ");
-                    an = sc.nextInt();
+                    String zi, luna, an;
+                    System.out.println("Data (zz-ll-aaaa): ");
+                    String dataFormat = sc.nextLine();
 
-                    Date data_programare = new SimpleDateFormat("dd/MM/yyyy").parse(Integer.toString(zi) + '/' + Integer.toString(luna) + '/' + Integer.toString(an));
+                    Date data_programare = new SimpleDateFormat("dd/MM/yyyy").parse(dataFormat.replace('-', '/'));
                     programari.get(toChange).setData_ora_programare(data_programare);
 
                     break;
@@ -135,6 +132,7 @@ public class Main {
                     System.out.print("Numele-ul produsului cautat: ");
                     String nume = sc.next();
                     Produse elem = findProdusByName(produse, nume);
+                    assert elem != null;
                     System.out.println(elem.getNume());
                     System.out.println(elem.getPret_vanzare());
                     System.out.println(elem.getPret());
@@ -194,8 +192,118 @@ public class Main {
                     new_pret = sc.nextFloat();
 
                     produse.get(elem).setPret(new_pret);
-                }
+
                     break;
+                }
+                case 11:{
+                    if(clienti.size() == 0)
+                        System.out.println("Nu am avut niciun client pana acum!");
+                    else {
+                        for (Client elem : clienti) {
+                            System.out.println("Nume: " + elem.getNume() + " " + elem.getPrenume());
+                            System.out.println("Data nastere: " + elem.getData_nastere());
+                            System.out.println("Puncte: " + elem.getPuncte());
+                            System.out.println("email: " + elem.getMail());
+                            System.out.println("Telefon: " + elem.getTelefon());
+                            System.out.println("------------------");
+                        }
+                    }
+
+                    break;
+                }
+
+                case 12: {
+                    System.out.print("Introduceti id-ul clientului: ");
+                    int id = sc.nextInt();
+                    int index = findClientById(clienti, id);
+                    System.out.println("Nume: " + clienti.get(index).getNume() + " " + clienti.get(index).getPrenume());
+                    System.out.println("Data nastere: " + clienti.get(index).getData_nastere());
+                    System.out.println("Puncte: " + clienti.get(index).getPuncte());
+                    System.out.println("email: " + clienti.get(index).getMail());
+                    System.out.println("Telefon: " + clienti.get(index).getTelefon());
+
+                    break;
+                }
+
+                case 13: {
+                    String nume, prenume, data, mail, telefon;
+                    int zi, luna, an;
+
+                    System.out.print("Prenume: ");
+                    prenume = sc.nextLine();
+
+                    System.out.print("Nume: ");
+                    nume = sc.nextLine();
+
+                    System.out.print("Data nasterii (zz-ll-aaaa): ");
+                    String dataFormat = sc.nextLine();
+                    Date data_nastere = new SimpleDateFormat("dd/MM/yyyy").parse(dataFormat.replace('-','/'));
+
+                    System.out.print("Email: ");
+                    mail = sc.nextLine();
+
+                    System.out.print("Telefon: ");
+                    telefon = sc.nextLine();
+
+                    Client nou = new Client(nume, prenume, mail, telefon, clienti.size(), clienti.size(), 0, data_nastere);
+                    clienti.add(nou);
+
+                    break;
+                }
+
+                case 17: {
+                    if(medici.size() == 0)
+                        System.out.println("Nu avem niciun angajat!");
+                    else {
+                        for (Medici elem : medici) {
+                            System.out.println("Nume: " + elem.getNume() + " " + elem.getPrenume());
+                            System.out.println("email: " + elem.getMail());
+                            System.out.println("Telefon: " + elem.getTelefon());
+                            System.out.println("------------------");
+                        }
+                    }
+
+                    break;
+                }
+
+                case 18: {
+                    System.out.print("Introduceti id-ul medicului: ");
+                    int id = sc.nextInt();
+                    int index = findClientById(clienti, id);
+                    System.out.println("Nume: " + clienti.get(index).getNume() + " " + clienti.get(index).getPrenume());
+                    System.out.println("Data nastere: " + clienti.get(index).getData_nastere());
+                    System.out.println("Puncte: " + clienti.get(index).getPuncte());
+                    System.out.println("email: " + clienti.get(index).getMail());
+                    System.out.println("Telefon: " + clienti.get(index).getTelefon());
+
+                    break;
+                }
+
+                case 19: {
+
+                    String nume, prenume, data, mail, telefon;
+                    int zi, luna, an, id_salon;
+
+                    System.out.print("ID-ul salonului la care lucreaza: ");
+                    id_salon = sc.nextInt();
+
+                    System.out.print("Prenume: ");
+                    prenume = sc.nextLine();
+
+                    System.out.print("Nume: ");
+                    nume = sc.nextLine();
+
+                    System.out.print("Email: ");
+                    mail = sc.nextLine();
+
+                    System.out.print("Telefon: ");
+                    telefon = sc.nextLine();
+
+                    Medici nou = new Medici(nume, prenume, mail, telefon, medici.size(), id_salon);
+                    medici.add(nou);
+
+                    break;
+                }
             }
         }
     }
