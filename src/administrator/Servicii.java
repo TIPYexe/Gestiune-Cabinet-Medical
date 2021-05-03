@@ -2,21 +2,28 @@ package administrator;
 
 class Servicii {
     private int id_serviciu;
+    private String denumire;
     private float pret;
     private float durata;
     private int puncte;
 
-    public Servicii(float pret, float durata, int puncte) {
+    public Servicii(int id_serviciu, String denumire, float pret, float durata, int puncte) {
+        this.id_serviciu = id_serviciu;
+        this.denumire = denumire;
         this.pret = pret;
         this.durata = durata;
         this.puncte = puncte;
+    }
+
+    public String getDenumire() {
+        return denumire;
     }
 
     public int getPuncte() {
         return puncte;
     }
 
-    public int getId_serviciu() {
+    public int getId() {
         return id_serviciu;
     }
 

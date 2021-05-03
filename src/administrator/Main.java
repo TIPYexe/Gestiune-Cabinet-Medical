@@ -1,5 +1,6 @@
 package administrator;
 
+import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -10,7 +11,7 @@ import static administrator.Service.*;
 public class Main {
 
 
-    public static void main(String[] args) throws ParseException {
+    public static void main(String[] args) throws ParseException, IOException {
 
         List<Medici> medici = new ArrayList<>();
         List<Client> clienti = new ArrayList<>();
@@ -21,6 +22,11 @@ public class Main {
         List<Cabinet> cabinete = new ArrayList<>();
         List<Servicii> servicii = new ArrayList<>();
         List<Stoc> stocuri = new ArrayList<>();
+
+        readClientFromFile(clienti);
+        readMediciFromFile(medici);
+        readProgramareFromFile(programari);
+        readServiciiFromFile(servicii);
 
         boolean menu = true;
         while (menu) {
@@ -46,10 +52,10 @@ public class Main {
                         //sortez programarile dupa data
                         Collections.sort(programari);
                         for (Programare elem : programari) {
-                            System.out.println(elem.getServiciu());
-                            System.out.println(elem.getData_ora_programare());
-                            System.out.println(findMedicNameById(medici, elem.getId_medic()));
-                            System.out.println(findClientNameById(clienti, elem.getId_client()));
+                            System.out.println("id_serviciu: " + findServiciuNameById(servicii, elem.getServiciu()));
+                            System.out.println("data programare: " + elem.getData_programare());
+                            System.out.println("Medic: " + findMedicNameById(medici, elem.getId_medic()));
+                            System.out.println("Client: " + findClientNameById(clienti, elem.getId_client()));
                             System.out.println();
                         }
 
@@ -78,10 +84,10 @@ public class Main {
 
                         int zi, luna, an;
                         System.out.println("Data (zz-ll-aaaa): ");
-                        String dataFormat = sc.nextLine();
+                        String dataFormat = sc.next();
 
                         Date data_programare = new SimpleDateFormat("dd/MM/yyyy").parse(dataFormat.replace('-','/'));
-                        new_programare.setData_ora_programare(data_programare);
+                        new_programare.setData_programare(data_programare);
 
                         programari.add(new_programare);
 
@@ -96,10 +102,10 @@ public class Main {
 
                     String zi, luna, an;
                     System.out.println("Data (zz-ll-aaaa): ");
-                    String dataFormat = sc.nextLine();
+                    String dataFormat = sc.next();
 
                     Date data_programare = new SimpleDateFormat("dd/MM/yyyy").parse(dataFormat.replace('-', '/'));
-                    programari.get(toChange).setData_ora_programare(data_programare);
+                    programari.get(toChange).setData_programare(data_programare);
 
                     break;
                 }
@@ -230,22 +236,22 @@ public class Main {
                     int zi, luna, an;
 
                     System.out.print("Prenume: ");
-                    prenume = sc.nextLine();
+                    prenume = sc.next();
 
                     System.out.print("Nume: ");
-                    nume = sc.nextLine();
+                    nume = sc.next();
 
                     System.out.print("Data nasterii (zz-ll-aaaa): ");
-                    String dataFormat = sc.nextLine();
+                    String dataFormat = sc.next();
                     Date data_nastere = new SimpleDateFormat("dd/MM/yyyy").parse(dataFormat.replace('-','/'));
 
                     System.out.print("Email: ");
-                    mail = sc.nextLine();
+                    mail = sc.next();
 
                     System.out.print("Telefon: ");
-                    telefon = sc.nextLine();
+                    telefon = sc.next();
 
-                    Client nou = new Client(nume, prenume, mail, telefon, clienti.size(), clienti.size(), 0, data_nastere);
+                    Client nou = new Client(nume, prenume, mail, telefon, clienti.size()+1, clienti.size()+1, 0, data_nastere);
                     clienti.add(nou);
 
                     break;
@@ -288,18 +294,18 @@ public class Main {
                     id_salon = sc.nextInt();
 
                     System.out.print("Prenume: ");
-                    prenume = sc.nextLine();
+                    prenume = sc.next();
 
                     System.out.print("Nume: ");
-                    nume = sc.nextLine();
+                    nume = sc.next();
 
                     System.out.print("Email: ");
-                    mail = sc.nextLine();
+                    mail = sc.next();
 
                     System.out.print("Telefon: ");
-                    telefon = sc.nextLine();
+                    telefon = sc.next();
 
-                    Medici nou = new Medici(nume, prenume, mail, telefon, medici.size(), id_salon);
+                    Medici nou = new Medici(nume, prenume, mail, telefon, medici.size()+1, id_salon);
                     medici.add(nou);
 
                     break;
