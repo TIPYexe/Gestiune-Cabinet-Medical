@@ -1,12 +1,14 @@
 package administrator;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
+import org.w3c.dom.ranges.Range;
+
+import java.io.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Random;
+import java.text.DateFormat;
 
 public class Service {
 
@@ -138,6 +140,23 @@ public class Service {
         return -1;
     }
 
+
+    //region CSV
+
+    public static int countLines(File aFile) throws IOException {
+        LineNumberReader reader = null;
+        try {
+            reader = new LineNumberReader(new FileReader(aFile));
+            while ((reader.readLine()) != null);
+            return reader.getLineNumber();
+        } catch (Exception ex) {
+            return -1;
+        } finally {
+            if(reader != null)
+                reader.close();
+        }
+    }
+
     //region Read From File
 
 
@@ -215,6 +234,26 @@ public class Service {
         }
         csvReader.close();
     }
+
+    //endregion
+
+    //region Write File
+
+    public static void updateClientiFIle(List<Client> lista) throws IOException {
+        DateFormat df = new SimpleDateFormat("dd.MM.yyyy");
+
+        int nrLinii = countLines(new File("Data-Client.csv")) - 1;
+        FileWriter csvWriter = new FileWriter("Data-Client.csv", true);
+
+        for(int i = nrLinii; i < lista.size(); i++){
+            csvWriter.append(String.valueOf(lista.get(i).getId())).append(String.valueOf(';')).append(lista.get(i).getNume()).append(String.valueOf(';')).append(lista.get(i).getPrenume()).append(String.valueOf(';')).append(String.valueOf(lista.get(i).getCardId())).append(String.valueOf(';')).append(String.valueOf(lista.get(i).getPuncte())).append(String.valueOf(';')).append(df.format(lista.get(i).getData_nastere())).append(String.valueOf(';')).append(lista.get(i).getMail()).append(String.valueOf(';')).append(lista.get(i).getTelefon());
+            csvWriter.append('\n');
+        }
+
+        csvWriter.close();
+    }
+
+    //endregion
 
     //endregion
 }

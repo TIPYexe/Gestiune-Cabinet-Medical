@@ -42,6 +42,9 @@ public class Main {
             switch (optiune) {
                 case 0: {
                     menu = false;
+
+                    updateClientiFIle(clienti);
+
                     break;
                 }
                 case 1: {
