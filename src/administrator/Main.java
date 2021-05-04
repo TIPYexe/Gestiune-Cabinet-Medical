@@ -23,10 +23,9 @@ public class Main {
         List<Servicii> servicii = new ArrayList<>();
         List<Stoc> stocuri = new ArrayList<>();
 
-        readClientFromFile(clienti);
-        readMediciFromFile(medici);
-        readProgramareFromFile(programari);
-        readServiciiFromFile(servicii);
+        ReadWriteCSV Singleton = ReadWriteCSV.getInstance(programari, clienti, servicii, medici);
+
+        // TODO: sa astepte un ENTER de la tastatura inainte sa reafiseze meniul
 
         boolean menu = true;
         while (menu) {
@@ -43,7 +42,8 @@ public class Main {
                 case 0: {
                     menu = false;
 
-                    updateClientiFIle(clienti);
+                    // TODO: - sa rescrie toate randurile, ca poate modifica ceva vechi
+                    //       - sa fac scrierea-n fisier
 
                     break;
                 }
