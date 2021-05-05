@@ -20,7 +20,7 @@ public class Service {
         System.out.println("3. Actualizeaza data programare.");
         System.out.println("4. Asigneaza programarea altui medic.");
 
-        System.out.println("---PRODUSE---");
+        System.out.println("---PRODUSE (nu avem CSV pt asta) ---");
         System.out.println("5. Afiseaza stocul de produse.");
         System.out.println("6. Cauta produs dupa nume");
         System.out.println("7. Actualizare produse stoc.");
@@ -105,16 +105,6 @@ public class Service {
         return -1;
     }
 
-//    public static <T extends Programare Client> int findById(List<T> lista, int id) {
-//        int index = 0;
-//        for (T elem : lista) {
-//            if (elem.getId() == id)
-//                return index;
-//            index++;
-//        }
-//        return -1;
-//    }
-
     public static Produse findProdusByName(List<Produse> lista, String nume) {
         for (Produse elem : lista) {
             if (elem.getNume().equals(nume))
@@ -132,9 +122,5 @@ public class Service {
         }
         return -1;
     }
-
-
-
-
 
 }

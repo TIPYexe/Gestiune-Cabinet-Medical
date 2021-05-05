@@ -25,15 +25,19 @@ public class Main {
 
         ReadWriteCSV Singleton = ReadWriteCSV.getInstance(programari, clienti, servicii, medici);
 
-        // TODO: sa astepte un ENTER de la tastatura inainte sa reafiseze meniul
-
         boolean menu = true;
         while (menu) {
 
-            print_menu();
+            System.out.print("Press ENTER to continue.");
 
             int optiune;
             Scanner sc = new Scanner(System.in);
+
+            // astept un ENTER de la tastatura pentru a continua
+            sc.nextLine();
+
+            print_menu();
+
             optiune = sc.nextInt();
 
             clearScreen();
@@ -42,8 +46,10 @@ public class Main {
                 case 0: {
                     menu = false;
 
-                    // TODO: - sa rescrie toate randurile, ca poate modifica ceva vechi
-                    //       - sa fac scrierea-n fisier
+                    ReadWriteCSV.updateClientiFIle(clienti);
+                    ReadWriteCSV.updateMediciFIle(medici);
+                    ReadWriteCSV.updateProgramariFIle(programari);
+                    ReadWriteCSV.updateServiciiFIle(servicii);
 
                     break;
                 }
@@ -94,6 +100,8 @@ public class Main {
 
                         programari.add(new_programare);
 
+                        ReadWriteCSV.updateLogFile(new_programare, false);
+
                         break;
                     }
                 }
@@ -109,6 +117,8 @@ public class Main {
 
                     Date data_programare = new SimpleDateFormat("dd/MM/yyyy").parse(dataFormat.replace('-', '/'));
                     programari.get(toChange).setData_programare(data_programare);
+
+                    ReadWriteCSV.updateLogFile(toChange, true);
 
                     break;
                 }
@@ -257,6 +267,8 @@ public class Main {
                     Client nou = new Client(nume, prenume, mail, telefon, clienti.size()+1, clienti.size()+1, 0, data_nastere);
                     clienti.add(nou);
 
+                    ReadWriteCSV.updateLogFile(nou, false);
+
                     break;
                 }
 
@@ -310,6 +322,8 @@ public class Main {
 
                     Medici nou = new Medici(nume, prenume, mail, telefon, medici.size()+1, id_salon);
                     medici.add(nou);
+
+                    ReadWriteCSV.updateLogFile(nou, false);
 
                     break;
                 }
