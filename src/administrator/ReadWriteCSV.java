@@ -20,36 +20,38 @@ class ReadWriteCSV
 
     //region Read Log File
 
-    public static <T> void updateLogFile(T obiect, boolean tip) throws IOException {
+    public static <T> void updateLogFile(T obiect, boolean tip, int i) throws IOException {
 
         // tip = adevarat, daca e un update
         //       fals, daca e adaugare
 
-        String logInfo = "create";
+        String logInfo = "";
+        String status = "create";
         if(tip)
-            logInfo = "update";
+            status = "update";
 
-        FileWriter csvWriter = new FileWriter("Log-File.csv", true);
+        FileWriter csvWriter = new FileWriter("LogFile.csv", true);
         Timestamp timestamp = new Timestamp(System.currentTimeMillis());
 
-        if(obiect instanceof Client){
-            logInfo += "Client";
+        if(i==0){
+            logInfo = status + "Client";
         }
 
-        if(obiect instanceof Servicii){
-            logInfo += "Servicii";
+        if(i == 1){
+            logInfo = status + "Servicii";
         }
 
-        if(obiect instanceof Programare){
-            logInfo += "Programare";
+        if(i == 2){
+            logInfo = status + "Programare";
         }
 
-        if(obiect instanceof Medici){
-            logInfo += "Medici";
+        if(i == 3){
+            logInfo = status + "Medici";
         }
 
         csvWriter.append(logInfo).append(',').append(timestamp.toString());
         csvWriter.append('\n');
+        csvWriter.close();
     }
 
     //endregion
@@ -60,13 +62,12 @@ class ReadWriteCSV
 
         BufferedReader csvReader = new BufferedReader(new FileReader("Data-" + numeFisier + ".csv"));
         String row;
-        // sar peste primul rand, cel cu coloane
-        row = csvReader.readLine();
 
         while ((row = csvReader.readLine()) != null) {
 
+
             // nu inteleg de ce csv-ul meu are ; in loc de ,
-            String[] data = row.split(";");
+            String[] data = row.split(",");
 
             // le iau pe cazuri pt ca trb sa pasez informatia diferit in functie de fiecare tip de clasa
             if(numeFisier.equals("Client")) {
@@ -84,7 +85,7 @@ class ReadWriteCSV
             }
 
             if(numeFisier.equals("Servicii")) {
-                Servicii nou = new Servicii(Integer.parseInt(data[0]), data[1], Float.parseFloat(data[2]), Float.parseFloat(data[3]), Integer.parseInt(data[4]));
+                Servicii nou = new Servicii(Integer.parseInt(data[0]), data[1], Integer.parseInt(data[2]), Integer.parseInt(data[3]), Integer.parseInt(data[4]));
 
                 lista.add((T) nou);
             }
@@ -114,7 +115,7 @@ class ReadWriteCSV
 //        while ((row = csvReader.readLine()) != null) {
 //
 //            // nu inteleg de ce csv-ul meu are ; in loc de ,
-//            String[] data = row.split(";");
+//            String[] data = row.split(",");
 //
 //            Date data_nastere = new SimpleDateFormat("dd/MM/yyyy").parse(data[5].replace('.', '/'));
 //            Client nou = new Client(data[1], data[2], data[6], data[7], Integer.parseInt(data[0]), Integer.parseInt(data[3]), Integer.parseInt(data[4]), data_nastere);
@@ -133,7 +134,7 @@ class ReadWriteCSV
 //        while ((row = csvReader.readLine()) != null) {
 //
 //            // nu inteleg de ce csv-ul meu are ; in loc de ,
-//            String[] data = row.split(";");
+//            String[] data = row.split(",");
 //
 //            Medici nou = new Medici(data[1], data[2], data[4], data[5], Integer.parseInt(data[0]), Integer.parseInt(data[3]));
 //
@@ -151,7 +152,7 @@ class ReadWriteCSV
 //        while ((row = csvReader.readLine()) != null) {
 //
 //            // nu inteleg de ce csv-ul meu are ; in loc de ,
-//            String[] data = row.split(";");
+//            String[] data = row.split(",");
 //
 //            Servicii nou = new Servicii(Integer.parseInt(data[0]), data[1], Float.parseFloat(data[2]), Float.parseFloat(data[3]), Integer.parseInt(data[4]));
 //
@@ -169,7 +170,7 @@ class ReadWriteCSV
 //        while ((row = csvReader.readLine()) != null) {
 //
 //            // nu inteleg de ce csv-ul meu are ; in loc de ,
-//            String[] data = row.split(";");
+//            String[] data = row.split(",");
 //
 //            Date data_rezervare = new SimpleDateFormat("dd/MM/yyyy").parse(data[4].replace('.', '/'));
 //            Date data_efectuata = new SimpleDateFormat("dd/MM/yyyy").parse(data[5].replace('.', '/'));
@@ -190,7 +191,7 @@ class ReadWriteCSV
         FileWriter csvWriter = new FileWriter("Data-Client.csv");
 
         for (Client client : lista) {
-            csvWriter.append(String.valueOf(client.getId())).append(String.valueOf(';')).append(client.getNume()).append(String.valueOf(';')).append(client.getPrenume()).append(String.valueOf(';')).append(String.valueOf(client.getCardId())).append(String.valueOf(';')).append(String.valueOf(client.getPuncte())).append(String.valueOf(';')).append(df.format(client.getData_nastere())).append(String.valueOf(';')).append(client.getMail()).append(String.valueOf(';')).append(client.getTelefon());
+            csvWriter.append(String.valueOf(client.getId())).append(String.valueOf(',')).append(client.getNume()).append(String.valueOf(',')).append(client.getPrenume()).append(String.valueOf(',')).append(String.valueOf(client.getCardId())).append(String.valueOf(',')).append(String.valueOf(client.getPuncte())).append(String.valueOf(',')).append(df.format(client.getData_nastere())).append(String.valueOf(',')).append(client.getMail()).append(String.valueOf(',')).append(client.getTelefon());
             csvWriter.append('\n');
         }
 
@@ -202,7 +203,7 @@ class ReadWriteCSV
         FileWriter csvWriter = new FileWriter("Data-Medici.csv");
 
         for (Medici medici : lista) {
-            csvWriter.append(String.valueOf(medici.getId())).append(String.valueOf(';')).append(medici.getNume()).append(String.valueOf(';')).append(medici.getPrenume()).append(String.valueOf(';')).append(String.valueOf(medici.getId_salon())).append(String.valueOf(';')).append(medici.getMail()).append(String.valueOf(';')).append(medici.getTelefon());
+            csvWriter.append(String.valueOf(medici.getId())).append(String.valueOf(',')).append(medici.getNume()).append(String.valueOf(',')).append(medici.getPrenume()).append(String.valueOf(',')).append(String.valueOf(medici.getId_salon())).append(String.valueOf(',')).append(medici.getMail()).append(String.valueOf(',')).append(medici.getTelefon());
             csvWriter.append('\n');
         }
 
@@ -215,7 +216,7 @@ class ReadWriteCSV
         FileWriter csvWriter = new FileWriter("Data-Programare.csv");
 
         for (Programare programare : lista) {
-            csvWriter.append(String.valueOf(programare.getId())).append(String.valueOf(';')).append(String.valueOf(programare.getId_medic())).append(String.valueOf(';')).append(String.valueOf(programare.getId_client())).append(String.valueOf(';')).append(String.valueOf(programare.getServiciu())).append(String.valueOf(';')).append(df.format(programare.getData_programare())).append(String.valueOf(';')).append(df.format(programare.getData_efectuata()));
+            csvWriter.append(String.valueOf(programare.getId())).append(String.valueOf(',')).append(String.valueOf(programare.getId_medic())).append(String.valueOf(',')).append(String.valueOf(programare.getId_client())).append(String.valueOf(',')).append(String.valueOf(programare.getServiciu())).append(String.valueOf(',')).append(df.format(programare.getData_programare())).append(String.valueOf(',')).append(df.format(programare.getData_efectuata()));
             csvWriter.append('\n');
         }
 
@@ -226,7 +227,7 @@ class ReadWriteCSV
         FileWriter csvWriter = new FileWriter("Data-Servicii.csv");
 
         for (Servicii servicii : lista) {
-            csvWriter.append(String.valueOf(servicii.getId())).append(String.valueOf(';')).append(servicii.getDenumire()).append(String.valueOf(';')).append(String.valueOf(servicii.getPret())).append(String.valueOf(';')).append(String.valueOf(servicii.getDurata())).append(String.valueOf(';')).append(String.valueOf(servicii.getPuncte()));
+            csvWriter.append(String.valueOf(servicii.getId())).append(String.valueOf(',')).append(servicii.getDenumire()).append(String.valueOf(',')).append(String.valueOf(servicii.getPret())).append(String.valueOf(',')).append(String.valueOf(servicii.getDurata())).append(String.valueOf(',')).append(String.valueOf(servicii.getPuncte()));
             csvWriter.append('\n');
         }
 

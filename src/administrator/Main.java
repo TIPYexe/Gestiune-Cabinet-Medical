@@ -100,7 +100,7 @@ public class Main {
 
                         programari.add(new_programare);
 
-                        ReadWriteCSV.updateLogFile(new_programare, false);
+                        ReadWriteCSV.updateLogFile(new_programare, true, 2);
 
                         break;
                     }
@@ -118,7 +118,7 @@ public class Main {
                     Date data_programare = new SimpleDateFormat("dd/MM/yyyy").parse(dataFormat.replace('-', '/'));
                     programari.get(toChange).setData_programare(data_programare);
 
-                    ReadWriteCSV.updateLogFile(toChange, true);
+                    ReadWriteCSV.updateLogFile(toChange, true, 2);
 
                     break;
                 }
@@ -267,7 +267,7 @@ public class Main {
                     Client nou = new Client(nume, prenume, mail, telefon, clienti.size()+1, clienti.size()+1, 0, data_nastere);
                     clienti.add(nou);
 
-                    ReadWriteCSV.updateLogFile(nou, false);
+                    ReadWriteCSV.updateLogFile(nou, false, 0);
 
                     break;
                 }
@@ -323,9 +323,45 @@ public class Main {
                     Medici nou = new Medici(nume, prenume, mail, telefon, medici.size()+1, id_salon);
                     medici.add(nou);
 
-                    ReadWriteCSV.updateLogFile(nou, false);
+                    ReadWriteCSV.updateLogFile(nou, false, 3);
 
                     break;
+                }
+
+                case 22: {
+                    for(Servicii elem: servicii){
+                        System.out.println("Denumire: " + elem.getDenumire());
+                        System.out.println("Pret: " + elem.getPret());
+                        System.out.println("Durata: " + elem.getDurata());
+                        System.out.println("Puncte: " + elem.getPuncte());
+                        System.out.println("--------------");
+                        System.out.println();
+                    }
+                    break;
+                }
+
+                case 24: {
+                    String denumire;
+                    int puncte;
+                    int pret;
+                    int durata;
+
+                    System.out.print("Denumirea serviciului: ");
+                    denumire = sc.next();
+
+                    System.out.print("Pret: ");
+                    pret = sc.nextInt();
+
+                    System.out.print("Durata: ");
+                    durata = sc.nextInt();
+
+                    System.out.print("Cate puncte valoreaza: ");
+                    puncte = sc.nextInt();
+
+                    Servicii nou = new Servicii(servicii.size()+1, denumire, pret, durata, puncte);
+                    servicii.add(nou);
+
+                    ReadWriteCSV.updateLogFile(nou, false, 1);
                 }
             }
         }

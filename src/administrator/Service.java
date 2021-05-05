@@ -20,13 +20,13 @@ public class Service {
         System.out.println("3. Actualizeaza data programare.");
         System.out.println("4. Asigneaza programarea altui medic.");
 
-        System.out.println("---PRODUSE (nu avem CSV pt asta) ---");
-        System.out.println("5. Afiseaza stocul de produse.");
-        System.out.println("6. Cauta produs dupa nume");
-        System.out.println("7. Actualizare produse stoc.");
-        System.out.println("8. Adauga produs nou.");
-        System.out.println("9. Schimba pretul de vanzare.");
-        System.out.println("10. Schimba pretul de la retailer.");
+//        System.out.println("---PRODUSE (nu avem CSV pt asta) ---");
+//        System.out.println("5. Afiseaza stocul de produse.");
+//        System.out.println("6. Cauta produs dupa nume");
+//        System.out.println("7. Actualizare produse stoc.");
+//        System.out.println("8. Adauga produs nou.");
+//        System.out.println("9. Schimba pretul de vanzare.");
+//        System.out.println("10. Schimba pretul de la retailer.");
 
         System.out.println("---CLIENTI---");
         System.out.println("11. Afiseaza toti clientii avuti vreodata.");
@@ -43,10 +43,10 @@ public class Service {
         //System.out.println("20. Modifica adresa mail.");
         //System.out.println("21. Modifica numar de telefon.");
 
-        //System.out.println("---SERVICII---");
-        //System.out.println("22. Afiseaza toate serviciile.");
+        System.out.println("---SERVICII---");
+        System.out.println("22. Afiseaza toate serviciile.");
         //System.out.println("23. Cauta serviciu dupa nume.");
-        //System.out.println("24. Adauga serviciu nou.");
+        System.out.println("24. Adauga serviciu nou.");
         //System.out.println("25. Modifica cost.");
         //System.out.println("26. Modifica numar de puncte.");
     }

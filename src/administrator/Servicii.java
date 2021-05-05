@@ -3,11 +3,11 @@ package administrator;
 class Servicii {
     private int id_serviciu;
     private String denumire;
-    private float pret;
-    private float durata;
+    private int pret;
+    private int durata;
     private int puncte;
 
-    public Servicii(int id_serviciu, String denumire, float pret, float durata, int puncte) {
+    public Servicii(int id_serviciu, String denumire, int pret, int durata, int puncte) {
         this.id_serviciu = id_serviciu;
         this.denumire = denumire;
         this.pret = pret;
@@ -27,19 +27,19 @@ class Servicii {
         return id_serviciu;
     }
 
-    public float getPret() {
+    public int getPret() {
         return pret;
     }
 
-    public float getDurata() {
+    public int getDurata() {
         return durata;
     }
 
-    public void updatePret(float pret) {
+    public void updatePret(int pret) {
         this.pret = pret;
     }
 
-    public void updateDurata(float durata) {
+    public void updateDurata(int durata) {
         this.durata = durata;
     }
 }
