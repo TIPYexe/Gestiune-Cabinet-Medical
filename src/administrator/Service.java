@@ -17,37 +17,37 @@ public class Service {
         System.out.println("1. Afiseaza programarile.");
         System.out.println("2. Adauga programare.");
         System.out.println("3. Actualizeaza data programare.");
-        System.out.println("4. Asigneaza programarea altui medic.");
+        System.out.println("4. Sterge programare.");
 
         System.out.println("---PRODUSE---");
-        System.out.println("5. Afiseaza stocul de produse.");
-        System.out.println("6. Cauta produs dupa nume");
-        System.out.println("7. Actualizare produse stoc.");
-        System.out.println("8. Adauga produs nou.");
-        System.out.println("9. Schimba pretul de vanzare.");
-        System.out.println("10. Schimba pretul de la retailer.");
+//        System.out.println("5. Afiseaza stocul de produse.");
+//        System.out.println("6. Cauta produs dupa nume");
+//        System.out.println("7. Actualizare produse stoc.");
+//        System.out.println("8. Adauga produs nou.");
+//        System.out.println("9. Schimba pretul de vanzare.");
+//        System.out.println("10. Schimba pretul de la retailer.");
+        System.out.println("Work in progress!");
 
         System.out.println("---CLIENTI---");
-        System.out.println("11. Afiseaza toti clientii avuti vreodata.");
-        System.out.println("12. Cauta client dupa nume.");
-        System.out.println("13. Adauga client nou.");
-        //System.out.println("14. Modifica adresa mail.");
-        //System.out.println("15. Modifica numar de telefon.");
-        //System.out.println("16. Adauga card fidelitate.");
+        System.out.println("5. Afiseaza toti clientii avuti vreodata.");
+        System.out.println("6. Cauta client dupa nume.");
+        System.out.println("7. Adauga client nou.");
+        System.out.println("8. Modifica adresa mail.");
+        System.out.println("9. Sterge client.");
 
         System.out.println("---MEDICI---");
-        System.out.println("17. Afiseaza toti medicii.");
-        System.out.println("18. Cauta medic dupa nume.");
-        System.out.println("19. Adauga medic nou.");
-        //System.out.println("20. Modifica adresa mail.");
-        //System.out.println("21. Modifica numar de telefon.");
+        System.out.println("10. Afiseaza toti medicii.");
+        System.out.println("11. Cauta medic dupa nume.");
+        System.out.println("12. Adauga medic nou.");
+        System.out.println("13. Modifica adresa mail.");
+        System.out.println("14. Sterge medic.");
 
-        //System.out.println("---SERVICII---");
-        //System.out.println("22. Afiseaza toate serviciile.");
-        //System.out.println("23. Cauta serviciu dupa nume.");
-        //System.out.println("24. Adauga serviciu nou.");
-        //System.out.println("25. Modifica cost.");
-        //System.out.println("26. Modifica numar de puncte.");
+        System.out.println("---SERVICII---");
+        System.out.println("15. Afiseaza toate serviciile.");
+        System.out.println("16. Cauta serviciu dupa nume.");
+        System.out.println("17. Adauga serviciu nou.");
+        System.out.println("18. Modifica cost.");
+        System.out.println("19. Sterge serviciu.");
     }
 
     public static String findClientNameById(List<Client> lista, int id) {

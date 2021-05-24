@@ -38,6 +38,7 @@ public class Main {
                     menu = false;
                     break;
                 }
+
                 case 1: {
                     if (programari.size() == 0) {
                         System.out.println("Nu mai sunt programari!");
@@ -56,6 +57,7 @@ public class Main {
                     }
                     break;
                 }
+
                 case 2: {
 
                     if(medici.size() == 0){
@@ -88,6 +90,7 @@ public class Main {
                         break;
                     }
                 }
+
                 case 3: {
 
                     System.out.print("Id-ul programarii de actalizat: ");
@@ -115,86 +118,37 @@ public class Main {
 
                     break;
                 }
+
                 case 5: {
-                    if (produse.size() == 0) {
-                        System.out.println("Inca nu vindem produse!");
-                    } else {
-                        for (Produse elem : produse) {
-                            System.out.println(elem.getNume());
-                            System.out.println(elem.getPret_vanzare());
-                            System.out.println(elem.getPret());
-                            System.out.println();
-                        }
-                    }
-                    break;
-                }
-                case 6: {
-                    System.out.print("Numele-ul produsului cautat: ");
-                    String nume = sc.next();
-                    Produse elem = findProdusByName(produse, nume);
-                    assert elem != null;
-                    System.out.println(elem.getNume());
-                    System.out.println(elem.getPret_vanzare());
-                    System.out.println(elem.getPret());
-                    break;
-                }
-                case 7: {
-                    System.out.print("Numele-ul produsului cautat: ");
-                    String nume = sc.next();
-                    int elem = findProdusByName_int(produse, nume);
-                    System.out.print("Cate produse adaugam in stoc: ");
-                    int nr = sc.nextInt();
-                    produse.get(elem).addNr_produse(nr);
 
                     break;
                 }
+
+                case 6: {
+
+                    break;
+                }
+
+                case 7: {
+
+                    break;
+                }
+
                 case 8: {
 
-                    String nume, cod_bare;
-                    float pret, pret_vanzare;
-                    int nr_produse;
-
-                    System.out.print("Nume: ");
-                    nume = sc.next();
-                    System.out.print("Cod_bare: ");
-                    cod_bare = sc.next();
-                    System.out.print("Pret_vanzare: ");
-                    pret_vanzare = sc.nextFloat();
-                    System.out.print("Pret: ");
-                    pret = sc.nextFloat();
-                    System.out.print("Nr_produse: ");
-                    nr_produse = sc.nextInt();
-                    Produse new_produs = new Produse(cod_bare, nume, pret, pret_vanzare, nr_produse);
-
-                    produse.add(new_produs);
                     break;
                 }
+
                 case 9: {
-                    System.out.print("Numele-ul produsului de modificat: ");
-                    String nume = sc.next();
-                    int elem = findProdusByName_int(produse, nume);
-
-                    float new_pret;
-                    System.out.print("Noul pret de vanzare: ");
-                    new_pret = sc.nextFloat();
-
-                    produse.get(elem).setPret_vanzare(new_pret);
 
                     break;
                 }
-                case 10:{
-                    System.out.print("Numele-ul produsului de modificat: ");
-                    String nume = sc.next();
-                    int elem = findProdusByName_int(produse, nume);
 
-                    float new_pret;
-                    System.out.print("Noul pret de cumparare: ");
-                    new_pret = sc.nextFloat();
-
-                    produse.get(elem).setPret(new_pret);
+                case 10: {
 
                     break;
                 }
+
                 case 11:{
                     if(clienti.size() == 0)
                         System.out.println("Nu am avut niciun client pana acum!");

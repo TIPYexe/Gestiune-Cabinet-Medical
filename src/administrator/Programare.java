@@ -1,5 +1,6 @@
 package administrator;
 import java.util.Date;
+import java.sql.*;
 
 public class Programare implements Comparable<Programare> {
     private int id_programare;
@@ -82,6 +83,40 @@ public class Programare implements Comparable<Programare> {
 
     public void setData_ora_efectuata(Date data_ora_efectuata) {
         this.data_ora_efectuata = data_ora_efectuata;
+    }
+
+    public void loadProgramari(Programare nou) throws ClassNotFoundException, SQLException {
+        String myDriver = "org.gjt.mm.mysql.Driver";
+        String myUrl = "jdbc:mysql://localhost:3306/cabinet-medical";
+        Class.forName(myDriver);
+        Connection conn = DriverManager.getConnection(myUrl, "root", "");
+
+        // our SQL SELECT query.
+        // if you only need a few columns, specify them by name instead of using "*"
+        String query = "SELECT * FROM programari";
+
+        // create the java statement
+        Statement st = conn.createStatement();
+
+        // execute the query, and get a java resultset
+        ResultSet rs = st.executeQuery(query);
+
+        // iterate through the java resultset
+        while (rs.next())
+        {
+            setId_programare(rs.getInt("id_programare"));
+            setId_medic(rs.getInt("id_medic"));
+            setId_serviciu(rs.getInt("id_serviciu"));
+            setData_ora_programare(rs.getString("data_ora_programare"));
+            setData_ora_efectuata(rs.getString("data_ora_efectuata"));
+            Date dateCreated = rs.getDate("date_created");
+            boolean isAdmin = rs.getBoolean("is_admin");
+            int numPoints = rs.getInt("num_points");
+
+            // print the results
+            System.out.format("%s, %s, %s, %s, %s, %s\n", id, firstName, lastName, dateCreated, isAdmin, numPoints);
+        }
+        st.close();
     }
 }
 
