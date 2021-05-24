@@ -4,7 +4,27 @@ public class Om {
     private String nume;
     private String prenume;
     private String mail;
+
+    public void setNume(String nume) {
+        this.nume = nume;
+    }
+
+    public void setPrenume(String prenume) {
+        this.prenume = prenume;
+    }
+
+    public void setMail(String mail) {
+        this.mail = mail;
+    }
+
+    public void setTelefon(String telefon) {
+        this.telefon = telefon;
+    }
+
     private String telefon;
+
+    public Om() {
+    }
 
     public Om(String nume, String prenume, String mail, String telefon) {
         this.nume = nume;

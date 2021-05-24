@@ -1,5 +1,9 @@
 package administrator;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -10,7 +14,13 @@ import static administrator.Service.*;
 public class Main {
 
 
-    public static void main(String[] args) throws ParseException {
+    public static void main(String[] args) throws ParseException, SQLException, ClassNotFoundException {
+
+        String myUrl = "jdbc:mysql://localhost:3306/cabinet-medical";
+
+        Connection conn = DriverManager.getConnection(myUrl, "root", "");
+
+        Statement st = conn.createStatement();
 
         List<Medici> medici = new ArrayList<>();
         List<Client> clienti = new ArrayList<>();
@@ -21,6 +31,9 @@ public class Main {
         List<Cabinet> cabinete = new ArrayList<>();
         List<Servicii> servicii = new ArrayList<>();
         List<Stoc> stocuri = new ArrayList<>();
+
+        // Citim din fisiere si incarcam in liste
+        Programare.loadProgramari(programari, st);
 
         boolean menu = true;
         while (menu) {
@@ -36,6 +49,7 @@ public class Main {
             switch (optiune) {
                 case 0: {
                     menu = false;
+                    st.close();
                     break;
                 }
 
