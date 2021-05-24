@@ -32,8 +32,12 @@ public class Main {
         List<Servicii> servicii = new ArrayList<>();
         List<Stoc> stocuri = new ArrayList<>();
 
-        // Citim din fisiere si incarcam in liste
-        Programare.loadProgramari(programari, st);
+        //region Citim din fisiere si incarcam in liste
+        loadProgramari(programari, st);
+        loadClienti(clienti, st);
+        loadMedici(medici, st);
+
+        //endregion
 
         boolean menu = true;
         while (menu) {
@@ -61,7 +65,7 @@ public class Main {
                         //sortez programarile dupa data
                         Collections.sort(programari);
                         for (Programare elem : programari) {
-                            System.out.println(elem.getServiciu());
+                            System.out.println(elem.getId_serviciu());
                             System.out.println(elem.getData_ora_programare());
                             System.out.println(findMedicNameById(medici, elem.getId_medic()));
                             System.out.println(findClientNameById(clienti, elem.getId_client()));
@@ -133,37 +137,7 @@ public class Main {
                     break;
                 }
 
-                case 5: {
-
-                    break;
-                }
-
-                case 6: {
-
-                    break;
-                }
-
-                case 7: {
-
-                    break;
-                }
-
-                case 8: {
-
-                    break;
-                }
-
-                case 9: {
-
-                    break;
-                }
-
-                case 10: {
-
-                    break;
-                }
-
-                case 11:{
+                case 5:{
                     if(clienti.size() == 0)
                         System.out.println("Nu am avut niciun client pana acum!");
                     else {
@@ -180,7 +154,7 @@ public class Main {
                     break;
                 }
 
-                case 12: {
+                case 6: {
                     System.out.print("Introduceti id-ul clientului: ");
                     int id = sc.nextInt();
                     int index = findClientById(clienti, id);
@@ -193,7 +167,35 @@ public class Main {
                     break;
                 }
 
-                case 13: {
+                case 10: {
+                    if(medici.size() == 0)
+                        System.out.println("Nu avem niciun angajat!");
+                    else {
+                        for (Medici elem : medici) {
+                            System.out.println("Nume: " + elem.getNume() + " " + elem.getPrenume());
+                            System.out.println("email: " + elem.getMail());
+                            System.out.println("Telefon: " + elem.getTelefon());
+                            System.out.println("------------------");
+                        }
+                    }
+
+                    break;
+                }
+
+                case 11: {
+                    System.out.print("Introduceti id-ul medicului: ");
+                    int id = sc.nextInt();
+                    int index = findClientById(clienti, id);
+                    System.out.println("Nume: " + clienti.get(index).getNume() + " " + clienti.get(index).getPrenume());
+                    System.out.println("Data nastere: " + clienti.get(index).getData_nastere());
+                    System.out.println("Puncte: " + clienti.get(index).getPuncte());
+                    System.out.println("email: " + clienti.get(index).getMail());
+                    System.out.println("Telefon: " + clienti.get(index).getTelefon());
+
+                    break;
+                }
+
+                case 12: {
                     String nume, prenume, data, mail, telefon;
                     int zi, luna, an;
 
@@ -215,34 +217,6 @@ public class Main {
 
                     Client nou = new Client(nume, prenume, mail, telefon, clienti.size(), clienti.size(), 0, data_nastere);
                     clienti.add(nou);
-
-                    break;
-                }
-
-                case 17: {
-                    if(medici.size() == 0)
-                        System.out.println("Nu avem niciun angajat!");
-                    else {
-                        for (Medici elem : medici) {
-                            System.out.println("Nume: " + elem.getNume() + " " + elem.getPrenume());
-                            System.out.println("email: " + elem.getMail());
-                            System.out.println("Telefon: " + elem.getTelefon());
-                            System.out.println("------------------");
-                        }
-                    }
-
-                    break;
-                }
-
-                case 18: {
-                    System.out.print("Introduceti id-ul medicului: ");
-                    int id = sc.nextInt();
-                    int index = findClientById(clienti, id);
-                    System.out.println("Nume: " + clienti.get(index).getNume() + " " + clienti.get(index).getPrenume());
-                    System.out.println("Data nastere: " + clienti.get(index).getData_nastere());
-                    System.out.println("Puncte: " + clienti.get(index).getPuncte());
-                    System.out.println("email: " + clienti.get(index).getMail());
-                    System.out.println("Telefon: " + clienti.get(index).getTelefon());
 
                     break;
                 }

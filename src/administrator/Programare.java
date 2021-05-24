@@ -22,7 +22,7 @@ public class Programare implements Comparable<Programare> {
         this.data_ora_efectuata = data_ora_efectuata;
     }
 
-    public int getServiciu() {
+    public int getId_serviciu() {
         return id_serviciu;
     }
 
@@ -86,27 +86,6 @@ public class Programare implements Comparable<Programare> {
         this.data_ora_efectuata = data_ora_efectuata;
     }
 
-    public static void loadProgramari(List<Programare> programari, Statement st) throws SQLException {
 
-        String query = "SELECT * FROM programari";
-
-        ResultSet rs = st.executeQuery(query);
-
-        Programare nou = new Programare();
-        while (rs.next())
-        {
-            nou.setId_programare(rs.getInt("id_programare"));
-            nou.setData_ora_programare(rs.getDate("data_ora_programare"));
-            nou.setData_ora_efectuata(rs.getDate("data_ora_programare"));
-            nou.setId_medic(rs.getInt("id_medic"));
-            nou.setId_client(rs.getInt("id_client"));
-            nou.setId_serviciu(rs.getInt("id_serviciu"));
-
-            // setData_ora_programare(new SimpleDateFormat("dd/MM/yyyy").parse(rs.getString("data_ora_programare").replace('-', '/')));
-            // setData_ora_efectuata(new SimpleDateFormat("dd/MM/yyyy").parse(rs.getString("data_ora_efectuata").replace('-', '/')));
-
-            programari.add(nou);
-        }
-    }
 }
 

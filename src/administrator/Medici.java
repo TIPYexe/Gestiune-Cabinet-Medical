@@ -34,22 +34,5 @@ class Medici extends Om {
         this.id_cabinet = id_cabinet;
     }
 
-    public static void loadMedici(List<Medici> medici, Statement st) throws SQLException {
-        String query = "SELECT * FROM medici";
 
-        ResultSet rs = st.executeQuery(query);
-
-        Medici nou = new Medici();
-        while (rs.next())
-        {
-            nou.setId_medic(rs.getInt("id_medic"));
-            nou.setNume(rs.getString("nume"));
-            nou.setPrenume(rs.getString("prenume"));
-            nou.setMail(rs.getString("mail"));
-            nou.setTelefon(rs.getString("telefon"));
-            nou.setId_cabinet(rs.getInt("id_cabinet"));
-
-            medici.add(nou);
-        }
-    }
 }
