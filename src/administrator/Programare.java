@@ -1,7 +1,5 @@
 package administrator;
 import java.util.Date;
-import java.sql.*;
-import java.util.List;
 
 public class Programare implements Comparable<Programare> {
     private int id_programare;
@@ -38,12 +36,14 @@ public class Programare implements Comparable<Programare> {
         return id_client;
     }
 
-    public Date getData_ora_programare() {
-        return data_ora_programare;
+    public java.sql.Date getData_ora_programare() {
+        return new java.sql.Date(data_ora_programare.getTime());
     }
 
-    public Date getData_ora_efectuata() {
-        return data_ora_efectuata;
+    public java.sql.Date getData_ora_efectuata() {
+        if (data_ora_efectuata != null)
+            return new java.sql.Date(data_ora_efectuata.getTime());
+        return null;
     }
 
     public void addData_efectuata(Date zi_ora){

@@ -1,8 +1,6 @@
 package administrator;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.List;
 
 public class Service {
@@ -127,6 +125,7 @@ public class Service {
         return -1;
     }
 
+    //region Citim din fisiere si incarcam in liste
     public static void loadProgramari(List<Programare> programari, Statement st) throws SQLException {
 
         String query = "SELECT * FROM programari";
@@ -195,7 +194,6 @@ public class Service {
 
         ResultSet rs = st.executeQuery(query);
 
-
         while (rs.next()) {
             Servicii nou = new Servicii();
             nou.setId_serviciu(rs.getInt("id_serviciu"));
@@ -206,4 +204,24 @@ public class Service {
             servicii.add(nou);
         }
     }
+    //endregion
+
+    //region Scriere in DB
+    public static void insertProgramari(Programare programare, Connection conn) throws SQLException {
+
+        String query = " insert into programari (id_programare, id_medic, id_client, id_serviciu, data_ora_programare, data_ora_efectuata)"
+                + " values (?, ?, ?, ?, ?, ?)";
+
+        PreparedStatement preparedStmt = conn.prepareStatement(query);
+        preparedStmt.setInt (1, programare.getId());
+        preparedStmt.setInt (2, programare.getId_medic());
+        preparedStmt.setInt (3, programare.getId_client());
+        preparedStmt.setInt (4, programare.getId_serviciu());
+        preparedStmt.setDate(5, programare.getData_ora_programare());
+        preparedStmt.setDate(6, programare.getData_ora_efectuata());
+
+        preparedStmt.execute();
+
+    }
+    //endregion
 }

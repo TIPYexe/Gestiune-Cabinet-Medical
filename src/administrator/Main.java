@@ -70,10 +70,10 @@ public class Main {
                         //sortez programarile dupa data
                         Collections.sort(programari);
                         for (Programare elem : programari) {
-                            System.out.println(elem.getId_serviciu());
-                            System.out.println(elem.getData_ora_programare());
-                            System.out.println(findMedicNameById(medici, elem.getId_medic()));
-                            System.out.println(findClientNameById(clienti, elem.getId_client()));
+                            System.out.println("Id_serviciu: " + elem.getId_serviciu());
+                            System.out.println("DataProgramare: " + elem.getData_ora_programare());
+                            System.out.println("Medic: " + findMedicNameById(medici, elem.getId_medic()));
+                            System.out.println("Client: " + findClientNameById(clienti, elem.getId_client()));
                             System.out.println();
                         }
 
@@ -101,14 +101,15 @@ public class Main {
                         id = sc.nextInt();
                         new_programare.setId_serviciu(id);
 
-                        int zi, luna, an;
-                        System.out.println("Data (zz-ll-aaaa): ");
-                        String dataFormat = sc.nextLine();
+                        System.out.print("Data (zz-ll-aaaa): ");
+                        String dataFormat = sc.next();
 
                         Date data_programare = new SimpleDateFormat("dd/MM/yyyy").parse(dataFormat.replace('-','/'));
                         new_programare.setData_ora_programare(data_programare);
 
                         programari.add(new_programare);
+
+                        insertProgramari(new_programare, conn);
 
                         break;
                     }
@@ -121,8 +122,8 @@ public class Main {
                     int toChange = findProgramareById(programari, id);
 
                     String zi, luna, an;
-                    System.out.println("Data (zz-ll-aaaa): ");
-                    String dataFormat = sc.nextLine();
+                    System.out.print("Data (zz-ll-aaaa): ");
+                    String dataFormat = sc.next();
 
                     Date data_programare = new SimpleDateFormat("dd/MM/yyyy").parse(dataFormat.replace('-', '/'));
                     programari.get(toChange).setData_ora_programare(data_programare);
@@ -234,16 +235,16 @@ public class Main {
                     id_cabinet = sc.nextInt();
 
                     System.out.print("Prenume: ");
-                    prenume = sc.nextLine();
+                    prenume = sc.next();
 
                     System.out.print("Nume: ");
-                    nume = sc.nextLine();
+                    nume = sc.next();
 
                     System.out.print("Email: ");
-                    mail = sc.nextLine();
+                    mail = sc.next();
 
                     System.out.print("Telefon: ");
-                    telefon = sc.nextLine();
+                    telefon = sc.next();
 
                     Medici nou = new Medici(nume, prenume, mail, telefon, medici.size(), id_cabinet);
                     medici.add(nou);
