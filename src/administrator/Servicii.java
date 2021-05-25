@@ -6,6 +6,9 @@ class Servicii {
     private float durata;
     private int puncte;
 
+    public Servicii() {
+    }
+
     public Servicii(float pret, float durata, int puncte) {
         this.pret = pret;
         this.durata = durata;
@@ -34,5 +37,21 @@ class Servicii {
 
     public void updateDurata(float durata) {
         this.durata = durata;
+    }
+
+    public void setId_serviciu(int id_serviciu) {
+        this.id_serviciu = id_serviciu;
+    }
+
+    public void setPret(float pret) {
+        this.pret = pret;
+    }
+
+    public void setDurata(float durata) {
+        this.durata = durata;
+    }
+
+    public void setPuncte(int puncte) {
+        this.puncte = puncte;
     }
 }

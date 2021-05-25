@@ -36,18 +36,23 @@ public class Main {
         loadProgramari(programari, st);
         loadClienti(clienti, st);
         loadMedici(medici, st);
+        loadServicii(servicii, st);
 
         //endregion
 
         boolean menu = true;
         while (menu) {
-
-            print_menu();
+            System.out.println("Press any key to continue...");
 
             int optiune;
             Scanner sc = new Scanner(System.in);
-            optiune = sc.nextInt();
 
+            // fac asta ca sa nu mai dea clear screen imediat dupa ce termina
+            // de executat functiile.
+            sc.nextLine();
+
+            print_menu();
+            optiune = sc.nextInt();
             clearScreen();
 
             switch (optiune) {
@@ -167,6 +172,31 @@ public class Main {
                     break;
                 }
 
+                case 7: {
+                    String nume, prenume, mail, telefon;
+
+                    System.out.print("Prenume: ");
+                    prenume = sc.nextLine();
+
+                    System.out.print("Nume: ");
+                    nume = sc.nextLine();
+
+                    System.out.print("Data nasterii (zz-ll-aaaa): ");
+                    String dataFormat = sc.nextLine();
+                    Date data_nastere = new SimpleDateFormat("dd/MM/yyyy").parse(dataFormat.replace('-','/'));
+
+                    System.out.print("Email: ");
+                    mail = sc.nextLine();
+
+                    System.out.print("Telefon: ");
+                    telefon = sc.nextLine();
+
+                    Client nou = new Client(nume, prenume, mail, telefon, clienti.size(), clienti.size(), 0, data_nastere);
+                    clienti.add(nou);
+
+                    break;
+                }
+
                 case 10: {
                     if(medici.size() == 0)
                         System.out.println("Nu avem niciun angajat!");
@@ -196,8 +226,12 @@ public class Main {
                 }
 
                 case 12: {
-                    String nume, prenume, data, mail, telefon;
-                    int zi, luna, an;
+
+                    String nume, prenume,  mail, telefon;
+                    int id_cabinet;
+
+                    System.out.print("ID-ul cabinetului la care lucreaza: ");
+                    id_cabinet = sc.nextInt();
 
                     System.out.print("Prenume: ");
                     prenume = sc.nextLine();
@@ -205,45 +239,25 @@ public class Main {
                     System.out.print("Nume: ");
                     nume = sc.nextLine();
 
-                    System.out.print("Data nasterii (zz-ll-aaaa): ");
-                    String dataFormat = sc.nextLine();
-                    Date data_nastere = new SimpleDateFormat("dd/MM/yyyy").parse(dataFormat.replace('-','/'));
-
                     System.out.print("Email: ");
                     mail = sc.nextLine();
 
                     System.out.print("Telefon: ");
                     telefon = sc.nextLine();
 
-                    Client nou = new Client(nume, prenume, mail, telefon, clienti.size(), clienti.size(), 0, data_nastere);
-                    clienti.add(nou);
+                    Medici nou = new Medici(nume, prenume, mail, telefon, medici.size(), id_cabinet);
+                    medici.add(nou);
 
                     break;
                 }
 
-                case 19: {
-
-                    String nume, prenume, data, mail, telefon;
-                    int zi, luna, an, id_salon;
-
-                    System.out.print("ID-ul salonului la care lucreaza: ");
-                    id_salon = sc.nextInt();
-
-                    System.out.print("Prenume: ");
-                    prenume = sc.nextLine();
-
-                    System.out.print("Nume: ");
-                    nume = sc.nextLine();
-
-                    System.out.print("Email: ");
-                    mail = sc.nextLine();
-
-                    System.out.print("Telefon: ");
-                    telefon = sc.nextLine();
-
-                    Medici nou = new Medici(nume, prenume, mail, telefon, medici.size(), id_salon);
-                    medici.add(nou);
-
+                case 15: {
+                    for(Servicii elem:servicii){
+                        System.out.println("ID: " + elem.getId_serviciu());
+                        System.out.println("Pret: " + elem.getPret());
+                        System.out.println("Durata: " + elem.getDurata());
+                        System.out.println("Puncte: " + elem.getPuncte());
+                    }
                     break;
                 }
             }
