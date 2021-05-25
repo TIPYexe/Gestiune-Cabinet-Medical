@@ -1,6 +1,6 @@
 package administrator;
 
-class Servicii {
+public class Servicii {
     private int id_serviciu;
     private float pret;
     private float durata;

@@ -5,7 +5,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.List;
 
-class Medici extends Om {
+public class Medici extends Om {
     private int id_medic;
     private int id_cabinet;
 

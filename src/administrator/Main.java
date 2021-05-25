@@ -1,5 +1,8 @@
 package administrator;
 
+import database.GenerateDB;
+
+import java.io.FileNotFoundException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -9,18 +12,22 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 
 import static administrator.Service.*;
-
+import static repositories.ClientRepository.*;
+import static repositories.MediciRepository.*;
+import static repositories.ProgramareRepository.*;
+import static repositories.ServiciiRepository.*;
 
 public class Main {
 
 
-    public static void main(String[] args) throws ParseException, SQLException, ClassNotFoundException {
+    public static void main(String[] args) throws ParseException, SQLException, FileNotFoundException {
 
         String myUrl = "jdbc:mysql://localhost:3306/cabinet-medical";
 
         Connection conn = DriverManager.getConnection(myUrl, "root", "");
-
         Statement st = conn.createStatement();
+
+        GenerateDB.Generator(conn);
 
         List<Medici> medici = new ArrayList<>();
         List<Client> clienti = new ArrayList<>();
@@ -37,12 +44,11 @@ public class Main {
         loadClienti(clienti, st);
         loadMedici(medici, st);
         loadServicii(servicii, st);
-
         //endregion
 
         boolean menu = true;
         while (menu) {
-            System.out.println("Press any key to continue...");
+            System.out.print("Press any key to continue...");
 
             int optiune;
             Scanner sc = new Scanner(System.in);
@@ -70,6 +76,7 @@ public class Main {
                         //sortez programarile dupa data
                         Collections.sort(programari);
                         for (Programare elem : programari) {
+                            System.out.println("Id_programare: " + elem.getId());
                             System.out.println("Id_serviciu: " + elem.getId_serviciu());
                             System.out.println("DataProgramare: " + elem.getData_ora_programare());
                             System.out.println("Medic: " + findMedicNameById(medici, elem.getId_medic()));
@@ -120,25 +127,14 @@ public class Main {
                     System.out.print("Id-ul programarii de actalizat: ");
                     int id = sc.nextInt();
                     int toChange = findProgramareById(programari, id);
-
-                    String zi, luna, an;
-                    System.out.print("Data (zz-ll-aaaa): ");
-                    String dataFormat = sc.next();
-
-                    Date data_programare = new SimpleDateFormat("dd/MM/yyyy").parse(dataFormat.replace('-', '/'));
-                    programari.get(toChange).setData_ora_programare(data_programare);
-
+                    updateProgramari(programari, toChange, id, sc, conn);
                     break;
                 }
 
                 case 4: {
-                    System.out.print("Id-ul programarii de actalizat: ");
+                    System.out.print("Id-ul programarii de sters: ");
                     int id = sc.nextInt();
-                    int toChange = findProgramareById(programari, id);
-
-                    System.out.print("id-medic: ");
-                    id = sc.nextInt();
-                    programari.get(toChange).setId_medic(id);
+                    deleteProgramari(programari, id, conn);
 
                     break;
                 }
@@ -222,7 +218,7 @@ public class Main {
                     System.out.println("Puncte: " + clienti.get(index).getPuncte());
                     System.out.println("email: " + clienti.get(index).getMail());
                     System.out.println("Telefon: " + clienti.get(index).getTelefon());
-
+                    System.out.println();
                     break;
                 }
 
@@ -258,7 +254,21 @@ public class Main {
                         System.out.println("Pret: " + elem.getPret());
                         System.out.println("Durata: " + elem.getDurata());
                         System.out.println("Puncte: " + elem.getPuncte());
+                        System.out.println();
                     }
+                    break;
+                }
+
+                case 19:{
+                    GenerateDB.InsertData(conn);
+
+                    //region Citim din fisiere si incarcam in liste
+                    loadProgramari(programari, st);
+                    loadClienti(clienti, st);
+                    loadMedici(medici, st);
+                    loadServicii(servicii, st);
+                    //endregion
+
                     break;
                 }
             }

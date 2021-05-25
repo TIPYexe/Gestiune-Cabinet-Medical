@@ -1,6 +1,5 @@
 package administrator;
 
-import java.sql.*;
 import java.util.List;
 
 public class Service {
@@ -17,7 +16,7 @@ public class Service {
         System.out.println("---PROGRAMARI---");
         System.out.println("1. Afiseaza programarile.");
         System.out.println("2. Adauga programare.");
-        System.out.println("3. Actualizeaza data programare.");
+        System.out.println("3. Actualizeaza programare.");
         System.out.println("4. Sterge programare.");
 
         System.out.println("---PRODUSE---");
@@ -45,10 +44,12 @@ public class Service {
 
         System.out.println("---SERVICII---");
         System.out.println("15. Afiseaza toate serviciile.");
-        System.out.println("16. Cauta serviciu dupa nume.");
-        System.out.println("17. Adauga serviciu nou.");
-        System.out.println("18. Modifica cost.");
-        System.out.println("19. Sterge serviciu.");
+        System.out.println("16. Adauga serviciu nou.");
+        System.out.println("17. Modifica cost.");
+        System.out.println("18. Sterge serviciu.");
+
+        System.out.println("---INSERT DATA---");
+        System.out.println("19. Incarca baza de date cu ceva random.");
     }
 
     public static String findClientNameById(List<Client> lista, int id) {
@@ -124,104 +125,4 @@ public class Service {
         }
         return -1;
     }
-
-    //region Citim din fisiere si incarcam in liste
-    public static void loadProgramari(List<Programare> programari, Statement st) throws SQLException {
-
-        String query = "SELECT * FROM programari";
-
-        ResultSet rs = st.executeQuery(query);
-
-
-        while (rs.next()) {
-            Programare nou = new Programare();
-            nou.setId_programare(rs.getInt("id_programare"));
-            nou.setData_ora_programare(rs.getDate("data_ora_programare"));
-            nou.setData_ora_efectuata(rs.getDate("data_ora_efectuata"));
-            nou.setId_medic(rs.getInt("id_medic"));
-            nou.setId_client(rs.getInt("id_client"));
-            nou.setId_serviciu(rs.getInt("id_serviciu"));
-
-            // setData_ora_programare(new SimpleDateFormat("dd/MM/yyyy").parse(rs.getString("data_ora_programare").replace('-', '/')));
-            // setData_ora_efectuata(new SimpleDateFormat("dd/MM/yyyy").parse(rs.getString("data_ora_efectuata").replace('-', '/')));
-            // System.out.println(nou.getId() + " " + nou.getId_medic() + " " + nou.getId_client() + " " + nou.getId_serviciu());
-            programari.add(nou);
-        }
-    }
-
-    public static void loadClienti(List<Client> clineti, Statement st) throws SQLException {
-        String query = "SELECT * FROM clienti";
-
-        ResultSet rs = st.executeQuery(query);
-
-
-        while (rs.next()) {
-            Client nou = new Client();
-            nou.setId_client(rs.getInt("id_client"));
-            nou.setId_card(rs.getInt("id_card"));
-            nou.setPuncte(rs.getInt("puncte"));
-            nou.setNume(rs.getString("nume"));
-            nou.setPrenume(rs.getString("prenume"));
-            nou.setTelefon(rs.getString("telefon"));
-            nou.setMail(rs.getString("mail"));
-            nou.setData_nastere(rs.getDate("data_nastere"));
-
-            clineti.add(nou);
-        }
-    }
-
-    public static void loadMedici(List<Medici> medici, Statement st) throws SQLException {
-        String query = "SELECT * FROM medici";
-
-        ResultSet rs = st.executeQuery(query);
-
-
-        while (rs.next()) {
-            Medici nou = new Medici();
-            nou.setId_medic(rs.getInt("id_medic"));
-            nou.setNume(rs.getString("nume"));
-            nou.setPrenume(rs.getString("prenume"));
-            nou.setMail(rs.getString("mail"));
-            nou.setTelefon(rs.getString("telefon"));
-            nou.setId_cabinet(rs.getInt("id_cabinet"));
-
-            medici.add(nou);
-        }
-    }
-
-    public static void loadServicii(List<Servicii> servicii, Statement st) throws SQLException {
-        String query = "SELECT * FROM servicii";
-
-        ResultSet rs = st.executeQuery(query);
-
-        while (rs.next()) {
-            Servicii nou = new Servicii();
-            nou.setId_serviciu(rs.getInt("id_serviciu"));
-            nou.setPret(rs.getFloat("pret"));
-            nou.setDurata(rs.getFloat("durata"));
-            nou.setPuncte(rs.getInt("puncte"));
-
-            servicii.add(nou);
-        }
-    }
-    //endregion
-
-    //region Scriere in DB
-    public static void insertProgramari(Programare programare, Connection conn) throws SQLException {
-
-        String query = " insert into programari (id_programare, id_medic, id_client, id_serviciu, data_ora_programare, data_ora_efectuata)"
-                + " values (?, ?, ?, ?, ?, ?)";
-
-        PreparedStatement preparedStmt = conn.prepareStatement(query);
-        preparedStmt.setInt (1, programare.getId());
-        preparedStmt.setInt (2, programare.getId_medic());
-        preparedStmt.setInt (3, programare.getId_client());
-        preparedStmt.setInt (4, programare.getId_serviciu());
-        preparedStmt.setDate(5, programare.getData_ora_programare());
-        preparedStmt.setDate(6, programare.getData_ora_efectuata());
-
-        preparedStmt.execute();
-
-    }
-    //endregion
 }
