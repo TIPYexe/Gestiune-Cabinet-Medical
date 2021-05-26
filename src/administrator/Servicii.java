@@ -9,7 +9,8 @@ public class Servicii {
     public Servicii() {
     }
 
-    public Servicii(float pret, float durata, int puncte) {
+    public Servicii(int id_serviciu, float pret, float durata, int puncte) {
+        this.id_serviciu = id_serviciu;
         this.pret = pret;
         this.durata = durata;
         this.puncte = puncte;

@@ -69,7 +69,6 @@ public class ClientRepository {
         System.out.print("Ce camp actualizati: ");
         String toUpdateString = sc.useDelimiter("\n").next();
 
-        System.out.println(toUpdateString.toLowerCase());
         if(toUpdateString.toLowerCase().contains("card")){
 
             String query = "update clienti set id_card = ? where id_client = ?";

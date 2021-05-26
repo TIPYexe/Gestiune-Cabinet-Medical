@@ -160,6 +160,7 @@ public class Main {
                     System.out.print("Introduceti id-ul clientului: ");
                     int id = sc.nextInt();
                     int index = findClientById(clienti, id);
+                    System.out.println("ID: " + clienti.get(index).getId());
                     System.out.println("Nume: " + clienti.get(index).getNume() + " " + clienti.get(index).getPrenume());
                     System.out.println("Data nastere: " + clienti.get(index).getData_nastere());
                     System.out.println("Puncte: " + clienti.get(index).getPuncte());
@@ -275,6 +276,44 @@ public class Main {
                         System.out.println("Puncte: " + elem.getPuncte());
                         System.out.println("------------------");
                     }
+                    break;
+                }
+
+                case 16: {
+                    float durata, pret;
+                    int puncte;
+
+                    System.out.print("Durata: ");
+                    durata = sc.nextFloat();
+
+                    System.out.print("Pret: ");
+                    pret = sc.nextFloat();
+
+                    System.out.print("Puncte: ");
+                    puncte = sc.nextInt();
+
+                    Servicii nou = new Servicii(servicii.size(), pret, durata, puncte);
+                    servicii.add(nou);
+
+                    insertServicii(nou, conn);
+
+                    break;
+                }
+
+                case 17: {
+                    System.out.print("Id-ul serviciului de actalizat: ");
+                    int id = sc.nextInt();
+                    int toChange = findServiciuById(servicii, id);
+                    updateServicii(servicii, toChange, id, sc, conn);
+
+                    break;
+                }
+
+                case 18: {
+                    System.out.print("Id-ul serviciului de sters: ");
+                    int id = sc.nextInt();
+                    deleteServicii(servicii, id, conn);
+
                     break;
                 }
 

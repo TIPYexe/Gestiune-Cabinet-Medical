@@ -45,7 +45,7 @@ public class Service {
         System.out.println("---SERVICII---");
         System.out.println("15. Afiseaza toate serviciile.");
         System.out.println("16. Adauga serviciu nou.");
-        System.out.println("17. Modifica cost.");
+        System.out.println("17. Modifica date serviciu.");
         System.out.println("18. Sterge serviciu.");
 
         System.out.println("---INSERT DATA---");
@@ -72,6 +72,16 @@ public class Service {
         int index = 0;
         for (Client elem : lista) {
             if (elem.getId() == id)
+                return index;
+            index++;
+        }
+        return -1;
+    }
+
+    public static int findServiciuById(List<Servicii> lista, int id) {
+        int index = 0;
+        for (Servicii elem : lista) {
+            if (elem.getId_serviciu() == id)
                 return index;
             index++;
         }
