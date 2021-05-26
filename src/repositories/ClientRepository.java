@@ -67,9 +67,9 @@ public class ClientRepository {
     
     public static void updateClient(List<Client> clienti, int toChange, int id_client, Scanner sc, Connection conn) throws SQLException {
         System.out.print("Ce camp actualizati: ");
-        String toUpdateString = sc.next();
+        String toUpdateString = sc.useDelimiter("\n").next();
 
-        // ex input: id_medic sau data_programare
+        System.out.println(toUpdateString.toLowerCase());
         if(toUpdateString.toLowerCase().contains("card")){
 
             String query = "update clienti set id_card = ? where id_client = ?";
@@ -145,7 +145,8 @@ public class ClientRepository {
 
             clienti.get(toChange).setData_nastere(data_nastere);
             preparedStmt.executeUpdate();
-        }
+        } else
+            System.out.println("Field not found!");
 
 
         PreparedStatement commit = conn.prepareStatement("COMMIT");

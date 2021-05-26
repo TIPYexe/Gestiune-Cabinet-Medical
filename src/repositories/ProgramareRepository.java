@@ -76,10 +76,10 @@ public class ProgramareRepository {
 
     public static void updateProgramari(List<Programare> programari, int toChange, int id_programare, Scanner sc, Connection conn) throws SQLException, ParseException {
         System.out.print("Ce camp actualizati: ");
-        String toUpdateString = sc.next();
+        String toUpdateString = sc.useDelimiter("\n").next();
 
         // ex input: id_medic sau data_programare
-        if(toUpdateString.toLowerCase().contains("medic")){
+        if(toUpdateString.replace(" ", "").toLowerCase().contains("medic")){
 
             String query = "update programari set id_medic = ? where id_programare = ?";
             PreparedStatement preparedStmt = conn.prepareStatement(query);
@@ -94,7 +94,7 @@ public class ProgramareRepository {
             programari.get(toChange).setId_medic(Integer.parseInt(toUpdateValue));
             preparedStmt.executeUpdate();
 
-        } else if(toUpdateString.toLowerCase().contains("client")){
+        } else if(toUpdateString.replace(" ", "").toLowerCase().contains("client")){
             String query = "update programari set id_client = ? where id_programare = ?";
             PreparedStatement preparedStmt = conn.prepareStatement(query);
             preparedStmt.setInt   (2, id_programare);
@@ -106,7 +106,7 @@ public class ProgramareRepository {
             programari.get(toChange).setId_client(Integer.parseInt(toUpdateValue));
             preparedStmt.executeUpdate();
 
-        } else if(toUpdateString.toLowerCase().contains("serviciu")){
+        } else if(toUpdateString.replace(" ", "").toLowerCase().contains("serviciu")){
             String query = "update programari set id_serviciu = ? where id_programare = ?";
             PreparedStatement preparedStmt = conn.prepareStatement(query);
             preparedStmt.setInt   (2, id_programare);
@@ -118,7 +118,7 @@ public class ProgramareRepository {
             programari.get(toChange).setId_serviciu(Integer.parseInt(toUpdateValue));
             preparedStmt.executeUpdate();
 
-        } else if(toUpdateString.toLowerCase().contains("programare")){
+        } else if(toUpdateString.replace(" ", "").toLowerCase().contains("programare")){
             String query = "update programari set data_ora_programare = ? where id_programare = ?";
             PreparedStatement preparedStmt = conn.prepareStatement(query);
             preparedStmt.setInt   (2, id_programare);
@@ -132,7 +132,7 @@ public class ProgramareRepository {
             programari.get(toChange).setData_ora_programare(data_programare);
             preparedStmt.executeUpdate();
 
-        } else if(toUpdateString.toLowerCase().contains("efectuata")){
+        } else if(toUpdateString.replace(" ", "").toLowerCase().contains("efectuata")){
             String query = "update programari set data_ora_efectuata = ? where id_programare = ?";
             PreparedStatement preparedStmt = conn.prepareStatement(query);
             preparedStmt.setInt   (2, id_programare);

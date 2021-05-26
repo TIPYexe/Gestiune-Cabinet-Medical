@@ -39,7 +39,7 @@ public class Service {
         System.out.println("10. Afiseaza toti medicii.");
         System.out.println("11. Cauta medic dupa nume.");
         System.out.println("12. Adauga medic nou.");
-        System.out.println("13. Modifica adresa mail.");
+        System.out.println("13. Modifica date medic.");
         System.out.println("14. Sterge medic.");
 
         System.out.println("---SERVICII---");
