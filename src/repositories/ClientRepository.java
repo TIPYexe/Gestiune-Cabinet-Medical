@@ -44,7 +44,7 @@ public class ClientRepository {
         preparedStmt.setDate(8, data_nastere);
     }
     
-    public static void deleteClient(List<Client> clienti, int id, Connection conn) throws SQLException {
+    public static void deleteClient(int id, Connection conn) throws SQLException {
 
         String query = "DELETE FROM clienti where id_client = ?";
         PreparedStatement preparedStmt = conn.prepareStatement(query);
@@ -53,19 +53,9 @@ public class ClientRepository {
 
         PreparedStatement commit = conn.prepareStatement("COMMIT");
         commit.execute();
-        
-        int i=0;
-        for(Client elem: clienti){
-            if(elem.getId() == id)
-            {
-                clienti.remove(i);
-                break;
-            }
-            i++;
-        }
     }
     
-    public static void updateClient(List<Client> clienti, int toChange, int id_client, Scanner sc, Connection conn) throws SQLException {
+    public static void updateClient(int id_client, Scanner sc, Connection conn) throws SQLException {
         System.out.print("Ce camp actualizati: ");
         String toUpdateString = sc.useDelimiter("\n").next();
 
@@ -80,8 +70,6 @@ public class ClientRepository {
             String toUpdateValue = sc.next();
             preparedStmt.setInt(1, Integer.parseInt(toUpdateValue));
 
-            // Aici fac modificarea in lista locala
-            clienti.get(toChange).setId_card(Integer.parseInt(toUpdateValue));
             preparedStmt.executeUpdate();
 
         } else if(toUpdateString.toLowerCase().contains("nume")){
@@ -93,7 +81,6 @@ public class ClientRepository {
             String toUpdateValue = sc.next();
             preparedStmt.setString(1, toUpdateValue);
 
-            clienti.get(toChange).setNume(toUpdateValue);
             preparedStmt.executeUpdate();
 
         } else if(toUpdateString.toLowerCase().contains("prenume")){
@@ -105,7 +92,6 @@ public class ClientRepository {
             String toUpdateValue = sc.next();
             preparedStmt.setString(1, toUpdateValue);
 
-            clienti.get(toChange).setPrenume(toUpdateValue);
             preparedStmt.executeUpdate();
 
         } else if(toUpdateString.toLowerCase().contains("telefon")) {
@@ -117,7 +103,6 @@ public class ClientRepository {
             String toUpdateValue = sc.next();
             preparedStmt.setString(1, toUpdateValue);
 
-            clienti.get(toChange).setTelefon(toUpdateValue);
             preparedStmt.executeUpdate();
         } else if(toUpdateString.toLowerCase().contains("mail")) {
             String query = "update clienti set mail = ? where id_client = ?";
@@ -128,7 +113,6 @@ public class ClientRepository {
             String toUpdateValue = sc.next();
             preparedStmt.setString(1, toUpdateValue);
 
-            clienti.get(toChange).setMail(toUpdateValue);
             preparedStmt.executeUpdate();
 
         } else if(toUpdateString.toLowerCase().contains("nastere")){
@@ -142,7 +126,6 @@ public class ClientRepository {
 
             preparedStmt.setDate(1, data_nastere);
 
-            clienti.get(toChange).setData_nastere(data_nastere);
             preparedStmt.executeUpdate();
         } else
             System.out.println("Field not found!");

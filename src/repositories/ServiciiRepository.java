@@ -34,7 +34,7 @@ public class ServiciiRepository {
         preparedStmt.setInt(4, serviciu.getPuncte());
     }
 
-    public static void deleteServicii(List<Servicii> servicii, int id, Connection conn) throws SQLException {
+    public static void deleteServicii(int id, Connection conn) throws SQLException {
 
         String query = "DELETE FROM servicii where id_serviciu = ?";
         PreparedStatement preparedStmt = conn.prepareStatement(query);
@@ -43,19 +43,9 @@ public class ServiciiRepository {
 
         PreparedStatement commit = conn.prepareStatement("COMMIT");
         commit.execute();
-
-        int i=0;
-        for(Servicii elem: servicii){
-            if(elem.getId_serviciu() == id)
-            {
-                servicii.remove(i);
-                break;
-            }
-            i++;
-        }
     }
 
-    public static void updateServicii(List<Servicii> servicii, int toChange, int id_serviciu, Scanner sc, Connection conn) throws SQLException {
+    public static void updateServicii(int id_serviciu, Scanner sc, Connection conn) throws SQLException {
         System.out.print("Ce camp actualizati: ");
         String toUpdateString = sc.useDelimiter("\n").next();
 
@@ -70,8 +60,6 @@ public class ServiciiRepository {
             String toUpdateValue = sc.next();
             preparedStmt.setFloat(1, Float.parseFloat(toUpdateValue));
 
-            // Aici fac modificarea in lista locala
-            servicii.get(toChange).setPret(Float.parseFloat(toUpdateValue));
             preparedStmt.executeUpdate();
 
         } else if(toUpdateString.toLowerCase().contains("durata")){
@@ -83,7 +71,6 @@ public class ServiciiRepository {
             String toUpdateValue = sc.next();
             preparedStmt.setFloat(1, Float.parseFloat(toUpdateValue));
 
-            servicii.get(toChange).setDurata(Float.parseFloat(toUpdateValue));
             preparedStmt.executeUpdate();
 
         } else if(toUpdateString.toLowerCase().contains("puncte")){
@@ -95,7 +82,6 @@ public class ServiciiRepository {
             String toUpdateValue = sc.next();
             preparedStmt.setInt(1, Integer.parseInt(toUpdateValue));
 
-            servicii.get(toChange).setPuncte(Integer.parseInt(toUpdateValue));
             preparedStmt.executeUpdate();
 
         } else

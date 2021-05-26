@@ -39,13 +39,6 @@ public class Main {
         List<Servicii> servicii = new ArrayList<>();
         List<Stoc> stocuri = new ArrayList<>();
 
-        //region Citim din fisiere si incarcam in liste
-        loadProgramari(programari, st);
-        loadClienti(clienti, st);
-        loadMedici(medici, st);
-        loadServicii(servicii, st);
-        //endregion
-
         boolean menu = true;
         while (menu) {
             System.out.print("Press any key to continue...");
@@ -60,6 +53,13 @@ public class Main {
             print_menu();
             optiune = sc.nextInt();
             clearScreen();
+
+            //region Citim din fisiere si incarcam in liste
+            loadProgramari(programari, st);
+            loadClienti(clienti, st);
+            loadMedici(medici, st);
+            loadServicii(servicii, st);
+            //endregion
 
             switch (optiune) {
                 case 0: {
@@ -126,15 +126,14 @@ public class Main {
 
                     System.out.print("Id-ul programarii de actalizat: ");
                     int id = sc.nextInt();
-                    int toChange = findProgramareById(programari, id);
-                    updateProgramari(programari, toChange, id, sc, conn);
+                    updateProgramari(id, sc, conn);
                     break;
                 }
 
                 case 4: {
                     System.out.print("Id-ul programarii de sters: ");
                     int id = sc.nextInt();
-                    deleteProgramari(programari, id, conn);
+                    deleteProgramari(id, conn);
 
                     break;
                 }
@@ -200,8 +199,7 @@ public class Main {
                 case 8: {
                     System.out.print("Id-ul clientului de actalizat: ");
                     int id = sc.nextInt();
-                    int toChange = findClientById(clienti, id);
-                    updateClient(clienti, toChange, id, sc, conn);
+                    updateClient(id, sc, conn);
 
                     break;
                 }
@@ -209,7 +207,7 @@ public class Main {
                 case 9: {
                     System.out.print("Id-ul clientului de sters: ");
                     int id = sc.nextInt();
-                    deleteClient(clienti, id, conn);
+                    deleteClient(id, conn);
 
                     break;
                 }
@@ -265,6 +263,24 @@ public class Main {
                     Medici nou = new Medici(nume, prenume, mail, telefon, medici.size(), id_cabinet);
                     medici.add(nou);
 
+                    insertMedici(nou, conn);
+
+                    break;
+                }
+
+                case 13:{
+                    System.out.print("Id-ul medicului de actalizat: ");
+                    int id = sc.nextInt();
+                    updateMedici(id, sc, conn);
+
+                    break;
+                }
+
+                case 14: {
+                    System.out.print("Id-ul medicului de sters: ");
+                    int id = sc.nextInt();
+                    deleteMedici(id, conn);
+
                     break;
                 }
 
@@ -303,8 +319,7 @@ public class Main {
                 case 17: {
                     System.out.print("Id-ul serviciului de actalizat: ");
                     int id = sc.nextInt();
-                    int toChange = findServiciuById(servicii, id);
-                    updateServicii(servicii, toChange, id, sc, conn);
+                    updateServicii(id, sc, conn);
 
                     break;
                 }
@@ -312,20 +327,13 @@ public class Main {
                 case 18: {
                     System.out.print("Id-ul serviciului de sters: ");
                     int id = sc.nextInt();
-                    deleteServicii(servicii, id, conn);
+                    deleteServicii(id, conn);
 
                     break;
                 }
 
                 case 19:{
                     GenerateDB.InsertData(conn);
-
-                    //region Citim din fisiere si incarcam in liste
-                    loadProgramari(programari, st);
-                    loadClienti(clienti, st);
-                    loadMedici(medici, st);
-                    loadServicii(servicii, st);
-                    //endregion
 
                     break;
                 }

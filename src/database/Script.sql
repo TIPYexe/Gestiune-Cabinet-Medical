@@ -100,7 +100,7 @@ create table if not exists programari
     id_medic int not null,
     id_client int not null,
     id_serviciu int not null,
-    foreign key (id_medic) references medici (id_medic) ,
+    foreign key (id_medic) references medici (id_medic) on delete cascade,
     constraint programari_clienti_id_client_fk
         foreign key (id_client) references clienti (id_client) on delete cascade ,
     constraint programari_servicii_id_serviciu_fk
