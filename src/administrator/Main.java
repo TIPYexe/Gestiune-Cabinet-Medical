@@ -81,7 +81,7 @@ public class Main {
                             System.out.println("DataProgramare: " + elem.getData_ora_programare());
                             System.out.println("Medic: " + findMedicNameById(medici, elem.getId_medic()));
                             System.out.println("Client: " + findClientNameById(clienti, elem.getId_client()));
-                            System.out.println();
+                            System.out.println("------------------");
                         }
 
                     }
@@ -191,6 +191,25 @@ public class Main {
                     Client nou = new Client(nume, prenume, mail, telefon, clienti.size(), clienti.size(), 0, data_nastere);
                     clienti.add(nou);
 
+                    insertClient(nou, conn);
+
+                    break;
+                }
+
+                case 8: {
+                    System.out.print("Id-ul clientului de actalizat: ");
+                    int id = sc.nextInt();
+                    int toChange = findClientById(clienti, id);
+                    updateClient(clienti, toChange, id, sc, conn);
+
+                    break;
+                }
+
+                case 9: {
+                    System.out.print("Id-ul clientului de sters: ");
+                    int id = sc.nextInt();
+                    deleteClient(clienti, id, conn);
+
                     break;
                 }
 
@@ -254,7 +273,7 @@ public class Main {
                         System.out.println("Pret: " + elem.getPret());
                         System.out.println("Durata: " + elem.getDurata());
                         System.out.println("Puncte: " + elem.getPuncte());
-                        System.out.println();
+                        System.out.println("------------------");
                     }
                     break;
                 }

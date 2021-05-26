@@ -101,7 +101,7 @@ public class ProgramareRepository {
 
             System.out.print("Introduceti valoarea noua: ");
             String toUpdateValue = sc.next();
-            preparedStmt.setInt(2, Integer.parseInt(toUpdateValue));
+            preparedStmt.setInt(1, Integer.parseInt(toUpdateValue));
 
             programari.get(toChange).setId_client(Integer.parseInt(toUpdateValue));
             preparedStmt.executeUpdate();

@@ -32,7 +32,7 @@ public class Service {
         System.out.println("5. Afiseaza toti clientii avuti vreodata.");
         System.out.println("6. Cauta client dupa ID.");
         System.out.println("7. Adauga client nou.");
-        System.out.println("8. Modifica adresa mail.");
+        System.out.println("8. Modifica date client.");
         System.out.println("9. Sterge client.");
 
         System.out.println("---MEDICI---");
