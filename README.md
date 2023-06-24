@@ -1,4 +1,7 @@
-# Gestiune-Cabinet-Medical
+[![en](https://img.shields.io/badge/lang-en-red.svg)](https://github.com/TIPYexe/Gestiune-Cabinet-Medical/blob/master/README.en.md)
+[![ro](https://img.shields.io/badge/lang-ro-green.svg)](https://github.com/TIPYexe/Gestiune-Cabinet-Medical/blob/master/README.md)
+
+# Gestiune Cabinet Medical
 
 Am implementat clasele:
   - Cabinet (pot fi mai multe cabinete detinute de aceeasi firma)
